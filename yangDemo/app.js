@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var myRouter = require('./routes/routers')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -24,12 +25,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //use 没有指定路径，默认为根目录。
 
-app.get("/yj", function (req, res, next) {
-    res.render('demo.ejs', {name: ['yang', 'jian']})
-})
+// app.get("/cookie", function (req, res, next) {
+//     res.cookie('name', 'value')
+//     res.end('cookie did')
+// })
 // app.use('/', index);
 // app.use('/users', users);
 // app.use('/yj',yj);
+
+app.use('/', myRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
